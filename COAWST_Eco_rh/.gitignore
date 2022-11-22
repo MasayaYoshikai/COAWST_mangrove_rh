@@ -1,0 +1,12 @@
+*.o
+*.mod
+*.a
+*.log
+*.status
+*.conf
+*.stackdump
+*.exe
+Lib/SCRIP_COAWST/netcdf.inc
+*.nc
+*.bot
+*.grd
