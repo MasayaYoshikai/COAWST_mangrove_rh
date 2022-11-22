@@ -1,8 +1,11 @@
-# SEIB-DGVM for mangroves
+# COAWST incorporating drag model for Rhizophora mangroves
 
-This is a modified code of the **SEIB-DGVM version 2.81** for simulating mangrove growth under salinity stress.  
-The code was bulit on the one from <https://github.com/NakamuraTakashi/SEIB-DGVM> by Dr. Takashi Nakamura who made some modifications to the original code.  
-This modified code uses STPK Library (<http://www.gfd-dennou.org/library/davis/stpk/index.htm.en>).
+This is a modified code of the **COAWST** for simulating flow and sediment transport in Rhizophora mangrove forests.  
+The code was bulit on the one from <https://github.com/NakamuraTakashi/COAWST_Eco> by Dr. Takashi Nakamura who made some modifications to the original code.  
 
-The model is under consideration for publication in Biogeosciences:  
-Yoshikai, M., Nakamura, T., Suwa, R., Sharma, S., Rollon, R., Yasuoka, J., Egawa, R., and Nadaoka, K.: Predicting mangrove forest dynamics across a soil salinity gradient using an individual-based vegetation model linked with plant hydraulics, Biogeosciences Discuss. [preprint], https://doi.org/10.5194/bg-2021-255, in review, 2021.
+The directory "Data" contains input files, and "Projects" contains run scripts for following simulations used in a manuscript "Representing the impact of Rhizophora mangroves on flow and sediment transport in a hydrodynamic model: importance of three-dimensional root system structures" by M. Yoshikai et al.
+
+Mangrove_bak_exp: simulations for flows in Bakhawan Ecopark using Rh-model (ocean_mangrove_bak_exp_grd_v2.0.in), sparse cylinder model (ocean_mangrove_bak_exp_grd_v2.0_cylinder_case2.in), dense cylinder model (ocean_mangrove_bak_exp_grd_v2.0_cylinder_case3.in), and no vegetation (ocean_mangrove_bak_exp_grd_v2.0_noveg.in).
+Mangrove_bak_exp_actual: simulations for flows in Bakhawan Ecopark using Rh-model using measured root projected area (ocean_mangrove_bak_exp_grd_v2.0.in).
+Mangrove_bak_exp_sed_disc: simulations for sediment transport in Bakhawan Ecopark using Rh-model (ocean_mangrove_bak_exp_grd_v2.0_expXX.in), sparse cylinder model (ocean_mangrove_bak_exp_grd_v2.0_cylinder_case2_expXX.in), dense cylinder model (ocean_mangrove_bak_exp_grd_v2.0_cylinder_case3_expXX.in), and no vegetation (ocean_mangrove_bak_exp_grd_v2.0_noveg_expXX.in).
+Mangrove_maza_exp: simulations for flows in a model mangrove forest examined in Maza et al. (2017).
