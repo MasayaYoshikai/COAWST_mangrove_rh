@@ -281,11 +281,7 @@
 !$OMP MASTER
 #ifdef VEGETATION
 !     ! Run Rhizophora root model for each DBH class
-# ifdef DISTRIBUTE
-        CALL calc_root_farea ()
-# else
       CALL calc_root_farea ()
-# endif
 #endif
 !$OMP END MASTER
 !$OMP BARRIER
