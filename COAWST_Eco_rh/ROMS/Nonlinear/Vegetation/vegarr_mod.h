@@ -145,8 +145,14 @@
       allocate ( VEG(ng) % visc3d_r_veg(LBi:UBi,LBj:UBj,N(ng)) )
 # endif
 # ifdef VEG_TURB
-      allocate ( VEG(ng) % tke_veg(LBi:UBi,LBj:UBj,N(ng)) )
-      allocate ( VEG(ng) % gls_veg(LBi:UBi,LBj:UBj,N(ng)) )
+!!!>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>MY:Rm
+!      allocate ( VEG(ng) % tke_veg(LBi:UBi,LBj:UBj,N(ng)) )
+!      allocate ( VEG(ng) % gls_veg(LBi:UBi,LBj:UBj,N(ng)) )
+!!!<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<MY:Rm
+!!!>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>MY:Add
+      allocate ( VEG(ng) % tke_veg(LBi:UBi,LBj:UBj,0:N(ng)) )
+      allocate ( VEG(ng) % gls_veg(LBi:UBi,LBj:UBj,0:N(ng)) )
+!!!<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<MY:Add
 # endif
 # if defined VEG_SWAN_COUPLING && defined VEG_STREAMING
       allocate ( VEG(ng) % dissip_veg(LBi:UBi,LBj:UBj) )
