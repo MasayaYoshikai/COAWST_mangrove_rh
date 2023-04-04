@@ -31,6 +31,9 @@
       PUBLIC  :: vegetation_drag_cal
 !!!>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>MY:Add
       PRIVATE :: mangr_get_farea
+# ifdef MANGR_XIE
+      PRIVATE :: mangr_xie_farea
+# endif
 !!!<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<MY:Add
 
       CONTAINS
@@ -297,12 +300,15 @@
               Lveg_loc=MIN(1.0_r8-cff1,1.0_r8)
 !!!>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>MY:Add
 !
+              farea_out(i,j,k)=0.0_r8
+!
 ! If this is Rhizophora, compute the vertically integrated root
 ! projected area in a layer
 !
               IF (SPE_MANGR(iveg,ng)==1 .and.                           &
      &            dab(i,j,k-1)<mangr_layer_thck*                        &
-     &            dble(mangr_n_layer)) THEN
+     &            dble(mangr_n_layer) .and.                             &
+     &            plant(i,j,iveg,pdens)>1.e-06_r8) THEN
                 CALL mangr_get_farea ( &
                                                      ! *** Input ***
                 plant(i,j,iveg,pdiam)           , &  ! DBH given in a grid-cell (m)
@@ -313,9 +319,26 @@
                                                      ! *** Output ***
                 farea_out(i,j,k)                  &  ! Vertically integrated root projected area in a layer (m2 root/m2 ground)
                 )
-              ELSE
-                farea_out(i,j,k)=0.0_r8
               END IF
+
+# ifdef MANGR_XIE
+!
+!             Use of the Xie et al. (2020) model for the roots
+!
+              IF (SPE_MANGR(iveg,ng)==1 .and.                           &
+     &            plant(i,j,iveg,pdens)>1.e-06_r8) THEN
+                CALL mangr_xie_farea ( &
+                                                     ! *** Input ***
+                plant(i,j,iveg,pdiam)           , &  ! DBH given in a grid-cell (m)
+                plant(i,j,iveg,pdens)           , &  ! Tree density (tree/m2)
+                Hz(i,j,k)                       , &  ! Layer thickness
+                dab(i,j,k)                      , &  ! Height of upper boundary of the layer (m)
+                                                     !
+                                                     ! *** Output ***
+                farea_out(i,j,k)                  &  ! Vertically integrated root projected area in a layer (m2 root/m2 ground)
+                )
+              END IF
+# endif
 !
 !!!<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<MY:Add
 !
@@ -527,6 +550,58 @@
 
       RETURN
       END SUBROUTINE mangr_get_farea
+
+# ifdef MANGR_XIE
+      !-----------------------------------------------------------------------
+      SUBROUTINE mangr_xie_farea ( &
+                                           ! *** Input ***
+        diameter                      , &  ! DBH given in a grid-cell (m)
+        tree_dens                     , &  ! Tree density (tree/m2)
+        Hz                            , &  ! Layer thickness
+        dab                           , &  ! Height of upper boundary of the layer (m)
+                                           !
+                                           ! *** Output ***
+        pneu_farea_out_layer            &  ! Vertically integrated root projected area in a layer (m2 root/m2 ground)
+        )
+        !
+        ! !DESCRIPTION:
+        ! Rhizophora root model used in Xie et al. (2020) Environ Res Lett
+        ! Calculate the vertically integrated root projected area in a layer
+        !
+        ! !USES:
+        USE mod_kinds
+        USE mod_vegetation, only : FAI_ROOT
+        !
+        ! !ARGUMENTS:
+        implicit none
+        real(r8), intent(in)    :: diameter, tree_dens
+        real(r8), intent(in)    :: Hz, dab
+        real(r8), intent(inout) :: pneu_farea_out_layer
+        !
+        ! !LOCAL VARIABLES:
+        real(r8), parameter :: dmax = 100.0_r8        ! Maximum stem diameter (cm) in Xie et al. (2020)
+        real(r8), parameter :: pneu_nmax = 5000.0_r8  ! Maximum root number per tree in Xie et al. (2020)
+        real(r8), parameter :: f_val = 0.1_r8         ! Parameter describing the rate of increase in Xie et al. (2020)
+        real(r8), parameter :: h_pneu = 0.15_r8       ! Root height (m) in Xie et al. (2020)
+        real(r8) :: term1, pneu_dens
+        real(r8) :: Hz_inverse, cff1, Lveg_loc
+        !---------------------------------------------------------------------
+
+        ! Pneumatophore density (m-2)
+
+        term1 = 1.0_r8 + exp(f_val * (dmax*0.5_r8 - dbh_rep*100_r8))
+        pneu_dens = tree_dens * pneu_nmax * (1.0_r8 / term1)
+
+        ! Compute root projected area in the layer
+
+        Hz_inverse=1.0_r8/Hz
+        cff1 = MIN((dab-h_pneu)*Hz_inverse,1.0_r8)
+        Lveg_loc=MIN(1.0_r8-cff1,1.0_r8)
+        pneu_farea_out_layer = FAI_ROOT*pneu_dens*Hz*Lveg_loc
+
+      RETURN
+      END SUBROUTINE mangr_xie_farea
+# endif
 
 !!!<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<MY:Add
 #endif
