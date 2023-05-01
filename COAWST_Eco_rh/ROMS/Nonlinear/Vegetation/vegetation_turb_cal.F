@@ -190,11 +190,11 @@
 !      real(r8), parameter :: cl_veg=1.0_r8, ck=2.828427_r8      ! gamma = 0.5
 !      real(r8), parameter :: cl_veg=1.0_r8, ck=2.151657_r8      ! gamma = 0.6
 !      real(r8), parameter :: cl_veg=1.0_r8, ck=1.707469_r8      ! gamma = 0.7
-      real(r8), parameter :: cl_veg=1.0_r8, ck=1.397542_r8      ! gamma = 0.8
+!      real(r8), parameter :: cl_veg=1.0_r8, ck=1.397542_r8      ! gamma = 0.8
 !      real(r8), parameter :: cl_veg=1.0_r8, ck=1.171214_r8      ! gamma = 0.9
 !      real(r8), parameter :: cl_veg=1.0_r8, ck=1.0_r8           ! gamma = 1.0
 !      real(r8), parameter :: cl_veg=1.0_r8, ck=0.866784_r8      ! gamma = 1.1
-!      real(r8), parameter :: cl_veg=1.0_r8, ck=0.760726_r8      ! gamma = 1.2
+      real(r8), parameter :: cl_veg=1.0_r8, ck=0.760726_r8      ! gamma = 1.2
 !      real(r8), parameter :: cl_veg=1.0_r8, ck=0.67466_r8       ! gamma = 1.3
 !      real(r8), parameter :: cl_veg=1.0_r8, ck=0.603682_r8      ! gamma = 1.4
 !      real(r8), parameter :: cl_veg=1.0_r8, ck=0.544331_r8      ! gamma = 1.5
@@ -379,6 +379,13 @@
               ELSE
                 L_root = cl_veg*plant(i,j,iveg,pdiam)  ! Dummy input
               END IF
+# if defined TURB_LENGTH_STEM
+              L_root = cl_veg*plant(i,j,iveg,pdiam)
+# elif defined TURB_LENGTH_ROOT
+              IF (SPE_MANGR(iveg,ng)==1) THEN
+                L = cl_veg*FAI_ROOT
+              END IF
+# endif
 !
 !!!<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<MY:Add
 !
