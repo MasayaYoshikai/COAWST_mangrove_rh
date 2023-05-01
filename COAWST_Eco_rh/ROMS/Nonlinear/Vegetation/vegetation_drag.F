@@ -589,7 +589,7 @@
 
         ! Pneumatophore density (m-2)
 
-        term1 = 1.0_r8 + exp(f_val * (dmax*0.5_r8 - dbh_rep*100_r8))
+        term1 = 1.0_r8 + exp(f_val * (dmax*0.5_r8 - diameter*100_r8))
         pneu_dens = tree_dens * pneu_nmax * (1.0_r8 / term1)
 
         ! Compute root projected area in the layer
