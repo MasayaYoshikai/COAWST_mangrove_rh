@@ -25,10 +25,15 @@ simulations for flows in Bakhawan Ecopark using
 simulation for flows in Bakhawan Ecopark using
 * A cylinder-array root model used in Xie et al. (2020)
 
-- Mangrove_bak_exp_sed_disc: simulations for sediment transport in Bakhawan Ecopark using
-  Rh-model (ocean_mangrove_bak_exp_grd_v2.0_expXX.in)
-  sparse cylinder model (ocean_mangrove_bak_exp_grd_v2.0_cylinder_case2_expXX.in)
-  dense cylinder model (ocean_mangrove_bak_exp_grd_v2.0_cylinder_case3_expXX.in)
-  no vegetation (ocean_mangrove_bak_exp_grd_v2.0_noveg_expXX.in)
+## Mangrove_maza_exp
+simulations for flows in a model mangrove forest examined in Maza et al. (2017) using
+* Rh-model (ocean_mangrove_maza_expX.in)
+* cylinder model (ocean_mangrove_maza_cylinder_expX.in)
 
-- Mangrove_maza_exp: simulations for flows in a model mangrove forest examined in Maza et al. (2017).
+## Mangrove_maza_exp_length_root
+simulations for flows in a model mangrove forest examined in Maza et al. (2017) using a root diameter for the vegetation-generated turbulence length-scale
+* Rh-model (ocean_mangrove_maza_expX.in)
+
+## Mangrove_maza_exp_length_stem
+simulations for flows in a model mangrove forest examined in Maza et al. (2017) using a stem diameter for the vegetation-generated turbulence length-scale
+* Rh-model (ocean_mangrove_maza_expX.in)
