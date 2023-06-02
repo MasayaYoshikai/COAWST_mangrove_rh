@@ -13,7 +13,7 @@ simulations for flows in Bakhawan Ecopark using
 * sparse cylinder model (ocean_mangrove_bak_exp_grd_v2.0_cylinder_case2.in)
 * dense cylinder model (ocean_mangrove_bak_exp_grd_v2.0_cylinder_case3.in)
 * increased bed roughness (ocean_mangrove_bak_exp_grd_v2.0_noveg_Nz3_bed_drag.in)
-* no vegetation (ocean_mangrove_bak_exp_grd_v2.0_noveg.in).
+* no vegetation (ocean_mangrove_bak_exp_grd_v2.0_noveg.in)
 
 ## Mangrove_bak_exp_actual
 
