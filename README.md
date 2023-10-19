@@ -1,10 +1,14 @@
 # COAWST incorporating drag model for Rhizophora mangroves
 
-This is a modified code of the **COAWST** for simulating flow and sediment transport in Rhizophora mangrove forests. 
- 
-The code was bulit on the one from <https://github.com/NakamuraTakashi/COAWST_Eco> by Dr. Takashi Nakamura who made some modifications to the original code.  
+This is a modified code of the **COAWST** for simulating flow in Rhizophora mangrove forests.
 
-The directory "Data" contains input files, and "Projects" contains run scripts for the following simulations used in a manuscript "Representing the impact of Rhizophora mangroves on flow in a hydrodynamic model: importance of three-dimensional root system structures" by M. Yoshikai et al. (under review)
+The model is described in:
+
+Yoshikai, M., Nakamura, T., Herrera, E. C., Suwa, R., Rollon, R., Ray, R., Furukawa, K., and Nadaoka, K.: Representing the impact of Rhizophora mangroves on flow in a hydrodynamic model (COAWST_rh v1.0): the importance of three-dimensional root system structures, Geosci. Model Dev., 16, 5847–5863, https://doi.org/10.5194/gmd-16-5847-2023, 2023.
+
+The directory "Data" contains input files, and "Projects" contains run scripts for the following simulations used in the above paper.
+
+The code was bulit on the one from <https://github.com/NakamuraTakashi/COAWST_Eco> by Dr. Takashi Nakamura who made some modifications to the original code.  
 
 ## Mangrove_bak_exp
 
