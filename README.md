@@ -3,7 +3,6 @@
 This is a modified code of the **COAWST** for simulating flow in Rhizophora mangrove forests.
 
 The model is described in:
-
 Yoshikai, M., Nakamura, T., Herrera, E. C., Suwa, R., Rollon, R., Ray, R., Furukawa, K., and Nadaoka, K.: Representing the impact of Rhizophora mangroves on flow in a hydrodynamic model (COAWST_rh v1.0): the importance of three-dimensional root system structures, Geosci. Model Dev., 16, 5847–5863, https://doi.org/10.5194/gmd-16-5847-2023, 2023.
 
 The directory "Data" contains input files, and "Projects" contains run scripts for the following simulations used in the above paper.
